@@ -6,6 +6,9 @@ const messages = {
   lessCharacters: 'Please provide more than 3 characters for username, email and password',
   duplicateUser: 'User already exists',
   userNotFound: 'Account dont exist',
-  incorrectPassword: 'Password do not match'
+  incorrectPassword: 'Password do not match',
+  accommodationCreated: 'Accommodation created',
+  unauthorizedAccess: 'Unauthorized Access',
+  invalidToken: 'Forbiden action, please try again'
 };
 export default messages;
