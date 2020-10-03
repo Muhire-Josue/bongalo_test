@@ -13,7 +13,7 @@ Use the package manager [npm](https://www.npmjs.com/) to install dependencies an
 
 Download the project
 ```bash
-git clone https://github.com/Muhire-Josue/express-app-starter.git
+git clone https://github.com/rwajon/bangalo-front.git
 ```
 cd into the project
 ```bash
