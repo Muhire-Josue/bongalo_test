@@ -3,8 +3,9 @@ import AccommodationController from '../controllers/accommodation.controller';
 import tokenAuthentication from '../middlewares/tokenAuthentication';
 
 const route = express.Router();
-const { createAccommodation } = AccommodationController;
+const { createAccommodation, listProperty } = AccommodationController;
 
-route.post('/accommodation', tokenAuthentication, createAccommodation);
+route.post('/', tokenAuthentication, createAccommodation);
+route.post('/new', listProperty);
 
 export default route;

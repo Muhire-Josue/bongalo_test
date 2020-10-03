@@ -7,8 +7,8 @@ import accommodationRoute from './accommodation.route';
 const app = express.Router();
 
 app.use(welcomeRoute);
-app.use('/api', userRoute);
-app.use('/api', accommodationRoute);
+app.use('/user', userRoute);
+app.use('/accommodation', accommodationRoute);
 
 
 export default app;

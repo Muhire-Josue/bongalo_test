@@ -16,7 +16,9 @@ const SubmitListing = ({
   formData,
   setFormData,
   handleChange,
-  submitListing,
+  loading,
+  error,
+  handleSubmit
 }) => {
   const history = useHistory();
 
@@ -52,6 +54,8 @@ const SubmitListing = ({
         <Footer
           screenNumber={screenNumber}
           handleChangeScreen={handleChangeScreen}
+          loading={loading}
+          handleSubmit={handleSubmit}
         />
       </footer>
     </Container>

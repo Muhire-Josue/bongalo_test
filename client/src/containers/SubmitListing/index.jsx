@@ -1,10 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
 
 import SubmitListing from "../../components/SubmitListing";
 import { MAX_LISTING_SCREENS } from "../../constants/general";
+import { saveListing } from '../../redux/actions/listing';
 
 const SubmitListingContainer = () => {
+  const dispatch = useDispatch();
   const [screenNumber, setScreenNumber] = React.useState(1);
   const [progress, setProgress] = React.useState(0);
   const [formData, setFormData] = React.useState({
@@ -19,7 +22,9 @@ const SubmitListingContainer = () => {
     },
   });
 
-  const { submitListing } = useSelector((state) => state);
+  const { amenities, place } = formData;
+  const { submitListing: { loading, data, error } } = useSelector((state) => state);
+  const history = useHistory();
 
   const handleChange = ({ name, value }) => {
     setFormData({
@@ -56,6 +61,15 @@ const SubmitListingContainer = () => {
     setProgress(percentage);
   };
 
+  const handleSubmit = () => {
+    const wifi = amenities.wifi;
+    const tv = amenities.tv;
+    const heat = amenities.heat;
+    const place_type = place.type;
+    const guest_number = place.placesNumber;
+    saveListing({ wifi, tv, heat, place_type, guest_number }, history)(dispatch)
+  }
+
   React.useEffect(() => {
     handleChangeProgress();
   }, [screenNumber, formData]);
@@ -69,7 +83,9 @@ const SubmitListingContainer = () => {
       formData={formData}
       setFormData={setFormData}
       handleChange={handleChange}
-      submitListing={submitListing}
+      loading={loading}
+      error={error}
+      handleSubmit={handleSubmit}
     />
   );
 };
