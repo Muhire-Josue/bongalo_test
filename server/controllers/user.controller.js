@@ -19,38 +19,43 @@ export default class UserController {
      * create User
      */
 
-     static async createUser(req, res){
-         try {
-             const user = req.body;
-             const salt = bcrypt.genSaltSync(10);
-             const plainTextPassword = user.password;
-             user.password = bcrypt.hashSync(plainTextPassword, salt);
-             await save(user);
-             const token = tokenGenerator({username: user.username, email: user.email});
-             return successResponse(res, created, userCreated, token, undefined);
-             
-         } catch (error) {
-             return errorResponse(res, conflict, duplicateUser);
-         }
-     }
+    static async createUser(req, res) {
+        try {
+            const user = req.body;
+            const salt = bcrypt.genSaltSync(10);
+            const plainTextPassword = user.password;
+            user.password = bcrypt.hashSync(plainTextPassword, salt);
+            const createdUser = await save(user);
+            const token = tokenGenerator({id: createdUser.dataValues.id, username: user.username, email: user.email });
+            return successResponse(res, created, userCreated, token, undefined);
 
-     /**
-      * User login
-      * 
-      */
+        } catch (error) {
+            return errorResponse(res, conflict, duplicateUser);
+        }
+    }
 
-      static async login(req, res) {
-          const {email, password} = req.body;
-          const user = await findUserByEmail(email);
-          if(!user){
-              return errorResponse(res, notFound, userNotFound);
-          }
-          const passwordMatch = bcrypt.compareSync(password, user.password);
+    /**
+     * User login
+     * 
+     */
+
+    static async login(req, res) {
+        try {
+            const { email, password } = req.body;
+            const user = await findUserByEmail(email);
+            if (!user) {
+                return errorResponse(res, notFound, userNotFound);
+            }
+            const passwordMatch = bcrypt.compareSync(password, user.password);
             if (!passwordMatch) {
                 return errorResponse(res, badRequest, incorrectPassword);
             }
-          const token = tokenGenerator({username: user.username, email: user.email});
+            const token = tokenGenerator({ id: user.id, username: user.username, email: user.email });
 
-          return successResponse(res, ok, loggedIn, token, undefined);
-      }
+            return successResponse(res, ok, loggedIn, token, undefined);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
