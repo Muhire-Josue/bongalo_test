@@ -1,11 +1,8 @@
-# express-app-starter
-
-This is a quicker starter template for express and node applications. Have the folder structure, eslint and babel configurations and tests ready for your Express application.
+Follow the instructions bellow to run the API
 
 ### Requirements
 - `Nodejs v10-13` - a JavaScript run-time environment that executes JavaScript code outside of a browser
 - `POSTGRES` - a database management system for data persistence
-- `.env.example` - a file that contains all the variable environment for this project
 
 ## Installation
 
@@ -13,17 +10,13 @@ Use the package manager [npm](https://www.npmjs.com/) to install dependencies an
 
 Download the project
 ```bash
-git clone https://github.com/Muhire-Josue/express-app-starter.git
+git clone https://github.com/Muhire-Josue/bongalo_test.git
 ```
 cd into the project
 ```bash
-cd express-app-starter/
+cd bongalo_test/
 ```
 Install dependencies
-```bash
-npm install
-```
-Tests
 ```bash
 npm install
 ```
@@ -37,11 +30,13 @@ npm run dev
 ```
 Head over to postman (or web browser) and hit this URL GET: http://localhost:3000
 ```
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+### API ENDPOINTS
+| API | Methods  | Description  |
+| ------- | --- | --- |
+| `/` | GET | Welcome message |
+| `api/user/create` | POST | Create account |
+| `api/user/login` | POST | Login |
+| `api/accommodation` | POST | List accommodation |
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+- None
